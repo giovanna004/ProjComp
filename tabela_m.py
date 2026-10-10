@@ -31,7 +31,7 @@ tabela_M = {
     ('MAIS_VAR', 'else'): [],
     ('MAIS_VAR', 'end'): [],
     ('MAIS_VAR', 'final'): [],
-    ('PFALSA', 'else'): ['else', 'cmds'],
+    ('PFALSA', 'else'): ['else', 'CMDS'],
     ('PFALSA', 'end'): [],
     ('RESTO_IDENT', '='): ['=', 'EXP_IDENT'],
     ('EXP_IDENT', '('): ['EXPRESSAO'],
