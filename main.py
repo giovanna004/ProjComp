@@ -1,8 +1,12 @@
 import sys
 
-from analisador_lexico import scan
+from lexico import scan
+from sintatico import analisa
+from semantico import analisar
+from conversor_ast import converter
+from gerador import gerar
+
 from tabela_m import tabela_M 
-from analisador_sintatico import analisa
 
 tokens = []
 ts = {}
@@ -14,7 +18,9 @@ def main():
     with open(sys.argv[1], 'r', encoding='utf-8') as arquivo:
             entrada = arquivo.read()
             tokens, ts = scan(entrada)
-            w = [t[0] for t in tokens]
-            analisa(w, tokens)
+            arvore = analisa(w, tokens)       #arvore concreta
+            ast = converter(arvore)           #arvore limpa
+            tabela = analisar(ast)            #confere erros, atribui enderecos
+            codigo = gerar(ast, tabela)       #lista de instrucoes
 
 main()
