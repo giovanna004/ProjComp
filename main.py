@@ -20,7 +20,11 @@ def main():
             tokens, ts = scan(entrada)
             arvore = analisa(w, tokens)       #arvore concreta
             ast = converter(arvore)           #arvore limpa
-            tabela = analisar(ast)            #confere erros, atribui enderecos
+            try:                              #confere erros, atribui enderecos
+                tabela = analisar(ast)
+            except ErroSemantico as e:
+                print(f"Erro semantico: {e}")
+                sys.exit(1)
             codigo = gerar(ast, tabela)       #lista de instrucoes
 
 main()
