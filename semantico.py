@@ -35,7 +35,6 @@ def sem_cond(c, ts):
 
 def sem_exp(e, ts):
     tipo = e[0]
-
     if tipo == 'id':
         exige(e[1], ts)
     elif tipo == 'neg':
