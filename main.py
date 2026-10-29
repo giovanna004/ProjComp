@@ -1,15 +1,12 @@
 import sys
 
 from lexico import scan
-from sintatico import analisa
-from semantico import analisar
-from conversor_ast import converter
+from sintatico import sintaxe
+from semantico import analisar, ErroSemantico
+from conversor import converter
 from gerador import gerar
 
-from tabela_m import tabela_M 
-
 tokens = []
-ts = {}
 
 def main():
     if len(sys.argv) < 2:
@@ -17,8 +14,9 @@ def main():
         return
     with open(sys.argv[1], 'r', encoding='utf-8') as arquivo:
             entrada = arquivo.read()
-            tokens, ts = scan(entrada)
-            arvore = analisa(w, tokens)       #arvore concreta
+            tokens = scan(entrada)
+            w = [t[0] for t in tokens]
+            arvore = sintaxe(w, tokens)       #arvore concreta
             ast = converter(arvore)           #arvore limpa
             try:                              #confere erros, atribui enderecos
                 tabela = analisar(ast)
@@ -26,5 +24,5 @@ def main():
                 print(f"Erro semantico: {e}")
                 sys.exit(1)
             codigo = gerar(ast, tabela)       #lista de instrucoes
-
+            for c in codigo: print(c)
 main()

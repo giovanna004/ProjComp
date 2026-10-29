@@ -1,0 +1,3 @@
+a, b;
+a = 2;
+if a > b then puts a else puts b end
