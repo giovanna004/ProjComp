@@ -24,5 +24,7 @@ def main():
                 print(f"Erro semantico: {e}")
                 sys.exit(1)
             codigo = gerar(ast, tabela)       #lista de instrucoes
-            for c in codigo: print(c)
+            with open(sys.argv[1], 'w', encoding='utf-8') as f:
+                for instrucao in codigo:
+                    f.write(instrucao + '\n')
 main()

@@ -34,7 +34,7 @@ def scan(entrada):
                 raise SyntaxError(f"Linha {linha}: '!' isolado")
             else:
                 tokens.append((c, c, linha)); i += 1
-        elif c in "+=*/(),;":
+        elif c in "+-=*/(),;":
             tokens.append((c, c, linha)); i += 1
         else: 
             raise SyntaxError(f"Linha {linha}: carcatere inválido '{c}'")

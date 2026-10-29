@@ -40,8 +40,8 @@ def sem_exp(e, ts):
     elif tipo == 'neg':
         sem_exp(e[1], ts)
     elif tipo == 'bin':
-        sem_exp(c[2], ts)
-        sem_exp(c[3], ts)
+        sem_exp(e[2], ts)
+        sem_exp(e[3], ts)
 
 def exige(nome, ts):
     if nome not in ts:
