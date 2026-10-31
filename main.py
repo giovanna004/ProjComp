@@ -1,8 +1,8 @@
 import sys
 
-from lexico import scan
+from lexico import lexica
 from sintatico import sintaxe
-from semantico import analisar, ErroSemantico
+from semantico import semantica, ErroSemantico
 from conversor import converter
 from gerador import gerar
 
@@ -14,12 +14,12 @@ def main():
         return
     with open(sys.argv[1], 'r', encoding='utf-8') as arquivo:
             entrada = arquivo.read()
-            tokens = scan(entrada)
+            tokens = lexica(entrada)
             w = [t[0] for t in tokens]
             arvore = sintaxe(w, tokens)       #arvore concreta
             ast = converter(arvore)           #arvore limpa
             try:                              #confere erros, atribui enderecos
-                tabela = analisar(ast)
+                tabela = semantica(ast)
             except ErroSemantico as e:
                 print(f"Erro semantico: {e}")
                 sys.exit(1)

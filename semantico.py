@@ -1,7 +1,7 @@
 class ErroSemantico(Exception):
     pass
 
-def analisar(ast):
+def semantica(ast):
     ts = {}
     sem_cmds(ast, ts)
     return ts

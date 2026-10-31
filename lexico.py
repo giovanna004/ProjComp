@@ -1,6 +1,6 @@
 RESERVADAS = {"puts","if","then","else","end","while","do"}
 
-def scan(entrada):
+def lexica(entrada):
     tokens = []
     i = 0
     linha = 1

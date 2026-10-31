@@ -7,7 +7,7 @@ class No:
 		self.filhos = []
 
 def error(msg, tokens, ip):
-	cat, lex, linha = tokens[ip]
+	_, _, linha = tokens[ip]
 	raise SyntaxError(f"Erro sintático na linha {linha}: {msg})")
 
 nao_terminais = {"PROG","CMDS","MAIS_CMDS","CMD","ID_CONT","VARS","MAIS_VAR",
