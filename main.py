@@ -10,7 +10,7 @@ tokens = []
 
 def main():
     if len(sys.argv) < 2:
-        print("Uso: python main.py entrada.txt")
+        print("Uso: python main.py 'entrada.txt'")
         return
     with open(sys.argv[1], 'r', encoding='utf-8') as arquivo:
             entrada = arquivo.read()
@@ -24,7 +24,7 @@ def main():
                 print(f"Erro semantico: {e}")
                 sys.exit(1)
             codigo = gerar(ast, tabela)       #lista de instrucoes
-            with open(sys.argv[1], 'w', encoding='utf-8') as f:
+            with open("arquivo.obj", 'w', encoding='utf-8') as objeto:
                 for instrucao in codigo:
-                    f.write(instrucao + '\n')
+                    objeto.write(instrucao + '\n')
 main()

@@ -1,37 +1,104 @@
 import sys
 
+def carregar(caminho):
+    C = []
+    with open(caminho, encoding='utf-8') as arquivo:
+        for linha in arquivo:
+            partes = linha.split()
+            if not partes:               # ignora linha vazia
+                continue
+            instrucao = partes[0]
+            argumento = partes[1] if len(partes) > 1 else None
+            C.append((instrucao, argumento))
+    return C
 
 def executar(C):
-    D = []
+    pilha = []
     i = 0
 
     while True:
-        op, arg = C[i]
+        instrucao, argumento = C[i]
         i +=1
 
-        if op == 'INPP':   D.append(arg)
-        if op == 'CRCT':   
-            D.append(arg)
-        if op == 'CRVL':   D.append(arg)
-        if op == 'SOMA':   D.append(arg)
-        if op == 'SUBT':   D.append(arg)
-        if op == 'MULT':   D.append(arg)
-        if op == 'DIVI':   D.append(arg)
-        if op == 'INVE':   D.append(arg)
-        if op == 'NEGA':   D.append(arg)
-        if op == 'CPME':   D.append(arg)
-        if op == 'CPIG':   D.append(arg)
-        if op == 'CDES':   D.append(arg)
-        if op == 'CPMA':   D.append(arg)
-        if op == 'CPMI':   D.append(arg)
-        if op == 'CMAI':   D.append(arg)
-        if op == 'ARMZ':   D.append(arg)
-        if op == 'DSVI':   D.append(arg)
-        if op == 'DSVF':   D.append(arg)
-        if op == 'LEIT':   D.append(arg)
-        if op == 'IMPR':   D.append(arg)
-        if op == 'ALME':   D.append(arg)
-        if op == 'PARA':   D.append(arg)
+        if instrucao == 'INPP':                     #Inicia programa
+            pilha.clear()
+        elif instrucao == 'CRCT':                   #Carrega constante k no topo da pilha
+            pilha.append(int(argumento))
+        elif instrucao == 'CRVL':                   #Carrega valor de endereco n no topo da pilha
+            pilha.append(pilha[int(argumento)])
+        elif instrucao == 'SOMA':                   
+            topo = pilha.pop()
+            antecessor = pilha.pop()
+            pilha.append(topo + antecessor)
+        elif instrucao == 'SUBT':                   
+            topo = pilha.pop()
+            antecessor = pilha.pop()
+            pilha.append(antecessor - topo)         
+        elif instrucao == 'MULT':                   
+            topo = pilha.pop()
+            antecessor = pilha.pop()
+            pilha.append(topo * antecessor)
+        elif instrucao == 'DIVI':                   
+            topo = pilha.pop()
+            antecessor = pilha.pop()
+            pilha.append(antecessor / topo)
+        elif instrucao == 'INVE':                   
+            topo = pilha.pop()
+            pilha.append(topo * -1)
+        elif instrucao == 'CPME':
+            topo = pilha.pop()
+            antecessor = pilha.pop()
+            if antecessor < topo : pilha.append(1) 
+            else : pilha.append(0)
+        elif instrucao == 'CPIG':
+            topo = pilha.pop()
+            antecessor = pilha.pop()
+            if antecessor == topo : pilha.append(1) 
+            else : pilha.append(0)
+        elif instrucao == 'CDES':
+            topo = pilha.pop()
+            antecessor = pilha.pop()
+            if antecessor != topo : pilha.append(1) 
+            else : pilha.append(0)            
+        elif instrucao == 'CPMA':
+            topo = pilha.pop()
+            antecessor = pilha.pop()
+            if antecessor > topo : pilha.append(1) 
+            else : pilha.append(0)            
+        elif instrucao == 'CPMI':
+            topo = pilha.pop()
+            antecessor = pilha.pop()
+            if antecessor <= topo : pilha.append(1) 
+            else : pilha.append(0)            
+        elif instrucao == 'CMAI':
+            topo = pilha.pop()
+            antecessor = pilha.pop()
+            if antecessor >= topo : pilha.append(1) 
+            else : pilha.append(0)            
+        elif instrucao == 'ARMZ':                       #Armazena o topo da pilha no endereço n
+            pilha[int(argumento)] = pilha.pop()
+        elif instrucao == 'DSVI':
+            i = int(argumento)
+        elif instrucao == 'DSVF':
+            if pilha.pop() == 0: i = int(argumento)
+        elif instrucao == 'LEIT':                       #Lê um lado da entrada para o topo da pilha
+            pilha.append(input())
+        elif instrucao == 'IMPR':
+            print(pilha.pop())
+        elif instrucao == 'ALME':                       #Reserva m posições na pilha; m depende do tipo da variável
+            pilha.extend([0.0] * int(argumento))
+        if instrucao == 'PARA':   
+            break
     
-with open(sys.argv[1], 'r', encoding='utf-8') as arquivo:
-            codigo = arquivo.read()
+def main():
+    if len(sys.argv) != 2:
+        print("Uso: python maquina.py arquivo.obj")
+        return
+    try:
+        C = carregar(sys.argv[1])
+        executar(C)
+    except Exception as e:
+        print(f"Erro: {e}")
+        sys.exit(1)
+
+main()
