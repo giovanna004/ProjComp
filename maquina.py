@@ -23,7 +23,7 @@ def executar(C):
         if instrucao == 'INPP':                     #Inicia programa
             pilha.clear()
         elif instrucao == 'CRCT':                   #Carrega constante k no topo da pilha
-            pilha.append(int(argumento))
+            pilha.append(float(argumento))
         elif instrucao == 'CRVL':                   #Carrega valor de endereco n no topo da pilha
             pilha.append(pilha[int(argumento)])
         elif instrucao == 'SOMA':                   
@@ -82,7 +82,7 @@ def executar(C):
         elif instrucao == 'DSVF':
             if pilha.pop() == 0: i = int(argumento)
         elif instrucao == 'LEIT':                       #Lê um lado da entrada para o topo da pilha
-            pilha.append(input())
+            pilha.append(float(input()))
         elif instrucao == 'IMPR':
             print(pilha.pop())
         elif instrucao == 'ALME':                       #Reserva m posições na pilha; m depende do tipo da variável

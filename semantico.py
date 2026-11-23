@@ -45,4 +45,4 @@ def sem_exp(e, ts):
 
 def exige(nome, ts):
     if nome not in ts:
-        raise ErroSemantico(f"variavel '{nome}' uada antes de ser declarada")
+        raise ErroSemantico(f"variavel '{nome}' usada antes de ser declarada")

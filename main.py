@@ -4,7 +4,7 @@ from lexico import lexica
 from sintatico import sintaxe
 from semantico import semantica, ErroSemantico
 from conversor import converter
-from gerador import gerar
+from tradutor import traduzir
 
 tokens = []
 
@@ -23,7 +23,7 @@ def main():
             except ErroSemantico as e:
                 print(f"Erro semantico: {e}")
                 sys.exit(1)
-            codigo = gerar(ast, tabela)       #lista de instrucoes
+            codigo = traduzir(ast, tabela)       #lista de instrucoes
             with open("arquivo.obj", 'w', encoding='utf-8') as objeto:
                 for instrucao in codigo:
                     objeto.write(instrucao + '\n')
