@@ -1,0 +1,80 @@
+--------Gramática---------
+
+
+PROG          -> CMDS
+CMDS          -> CMD MAIS_CMDS	| ε
+MAIS_CMDS     -> ; CMDS |  ε
+CMD           -> puts id 
+                | id ID_CONT 
+                | if CONDICAO then CMDS PFALSA end 
+                | while CONDICAO do CMDS end
+
+ID_CONT       -> MAIS_VAR | RESTO_IDENT
+
+VARS          -> id MAIS_VAR
+MAIS_VAR      -> , VARS | ε
+
+PFALSA        -> else CMDS | ε
+								
+RESTO_IDENT   -> = EXP_IDENT
+EXP_IDENT     -> EXPRESSAO | gets.to_f
+
+CONDICAO      -> EXPRESSAO RELACAO EXPRESSAO
+RELACAO       -> == | != | >= | <= | > | <
+EXPRESSAO     -> TERMO OUTROS_TERMOS
+TERMO         -> OP_UN FATOR MAIS_FATORES
+OP_UN         -> - | ε
+FATOR         -> id | numero_real | ( EXPRESSAO )
+OUTROS_TERMOS -> OP_AD TERMO OUTROS_TERMOS | ε
+OP_AD         -> + | -
+MAIS_FATORES  -> OP_MUL FATOR MAIS_FATORES | ε
+OP_MUL        -> * | /
+
+
+
+--------FIRST-------
+
+PROG          -> {puts| id | if | while | ε}
+CMDS          -> {puts | id | if | while | ε}
+MAIS_CMDS     -> {;| ε}
+CMD           -> {puts| id | if | while}
+ID_CONT       -> {, | = | ε}
+VARS          -> {id}
+MAIS_VAR      -> {,| ε}
+PFALSA        -> {else | ε}
+RESTO_IDENT   -> {=}
+EXP_IDENT     -> {- | id | numero_real | ( | gets.to_f} 
+CONDICAO      -> {- | id | numero_real | (}
+RELACAO       -> {== | != | >= | <= | > | <}
+EXPRESSAO     -> {- | id | numero_real | (}
+TERMO         -> {- | id | numero_real | (}
+OP_UN         -> {- | ε}
+FATOR         -> {id | numero_real | (}
+OUTROS_TERMOS -> {+ | - | ε}
+OP_AD         -> {+ | -}
+MAIS_FATORES  -> {* | / | ε}
+OP_MUL        -> {* | /}
+
+
+--------FOLLOW---------
+
+PROG          -> {$}
+CMDS          -> {end | else | $}
+MAIS_CMDS     -> {end | else | $}
+CMD           -> {;| end | else | $}
+ID_CONT       -> {;| end | else | $}
+VARS          -> {;| end | else | $}
+MAIS_VAR      -> {;| end | else | $}
+PFALSA        -> {end}
+RESTO_IDENT   -> {;| end | else | $}
+EXP_IDENT     -> {;| end | else | $} 
+CONDICAO      -> {then | do}
+RELACAO       -> {- | id | numero_real | (}
+EXPRESSAO     -> {== | != | >= | <= | > | < | then | do | ) | ;| end | else | $}
+TERMO         -> {+ | - | == | != | >= | <= | > | < | then | do | ) | ;| end | else | $}
+OP_UN         -> {id | numero_real | (}
+FATOR         -> {* | / | + | - | == | != | >= | <= | > | < | then | do | ) | ;| end | else | $}
+OUTROS_TERMOS -> {== | != | >= | <= | > | < | then | do | ) | ;| end | else | $}
+OP_AD         -> {- | id | numero_real | (}
+MAIS_FATORES  -> {+ | - | == | != | >= | <= | > | < | then | do | ) | ;| end | else | $}
+OP_MUL        -> {id | numero_real | (}
