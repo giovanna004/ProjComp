@@ -3,8 +3,6 @@ def converter(raiz):
     return conv_cmds(raiz.filhos[0])
 
 
-# ---------- COMANDOS ----------
-
 def conv_cmds(no):
     # CMDS -> ε  |  CMD MAIS_CMDS
     if not no.filhos:
@@ -61,8 +59,6 @@ def coletar_ids(mais_var, ids):
     coletar_ids(vars_.filhos[1], ids)
 
 
-# ---------- CONDICAO ----------
-
 def conv_condicao(no):
     # CONDICAO -> EXPRESSAO RELACAO EXPRESSAO
     esq = conv_expressao(no.filhos[0])
@@ -70,8 +66,6 @@ def conv_condicao(no):
     dir = conv_expressao(no.filhos[2])
     return ('cond', esq, op, dir)
 
-
-# ---------- EXPRESSOES ----------
 
 def conv_exp_ident(no):
     # EXP_IDENT -> EXPRESSAO  |  gets.to_f

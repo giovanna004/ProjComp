@@ -10,7 +10,7 @@ tokens = []
 
 def main():
     if len(sys.argv) < 2:
-        print("Uso: python main.py 'entrada.txt'")
+        print("Uso: python main.py entrada.txt")
         return
     with open(sys.argv[1], 'r', encoding='utf-8') as arquivo:
             entrada = arquivo.read()
