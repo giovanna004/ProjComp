@@ -33,8 +33,8 @@ Foi utilizada IA durante o desenvolvimento deste trabalho: **Claude (Anthropic)*
 | `tradutor.py` | Tradutor: gera o código objeto a partir da AST |
 | `main.py` | **Parte 1** — compilador (lê o código-fonte, grava o `.obj`) |
 | `maquina.py` | **Parte 2** — máquina virtual (lê o `.obj` e executa) |
-| `gramática.txt` | Gramática, conjuntos FIRST e FOLLOW |
-| `codigo-objeto.txt` | Descrição das instruções da máquina hipotética |
+| `gramatica.txt` | Gramática, conjuntos FIRST e FOLLOW |
+| `codigo_objeto.txt` | Descrição das instruções da máquina hipotética |
 | `entrada.txt` | Exemplo de programa de entrada |
 | `arquivo.obj` | Exemplo de código objeto gerado |
 
