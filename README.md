@@ -115,7 +115,7 @@ MAIS_FATORES  -> OP_MUL FATOR MAIS_FATORES | λ
 OP_MUL        -> * | /
 ```
 
-Os conjuntos FIRST e FOLLOW completos estão em `Gramática.txt`. O símbolo `λ` representa a cadeia vazia.
+Os conjuntos FIRST e FOLLOW completos estão em `gramatica.txt`. O símbolo `λ` representa a cadeia vazia.
 
 **Observações sobre a linguagem:**
 - Variáveis são declaradas por uma lista de identificadores, por exemplo `a, b, c;`, e todas têm um único tipo (real).
@@ -123,7 +123,7 @@ Os conjuntos FIRST e FOLLOW completos estão em `Gramática.txt`. O símbolo `λ
 
 ## Máquina hipotética (código objeto)
 
-Instruções implementadas pela máquina virtual (detalhes em `codigo-objeto.txt`):
+Instruções implementadas pela máquina virtual (detalhes em `codigo_objeto.txt`):
 
 | Grupo | Instruções |
 |---|---|
